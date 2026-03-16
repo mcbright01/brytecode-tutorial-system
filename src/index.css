@@ -1,0 +1,171 @@
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/500.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Monochrome Sky Theme */
+    --background: 240 20% 98%; /* #f4f4f9 */
+    --foreground: 0 0% 0%; /* #000000 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 200 28% 25%; /* #2f4550 */
+    --primary-foreground: 240 20% 98%;
+
+    --secondary: 200 16% 42%; /* #586f7c */
+    --secondary-foreground: 240 20% 98%;
+
+    --muted: 180 18% 78%; /* #b8dbd9 */
+    --muted-foreground: 200 28% 25%;
+
+    --accent: 180 18% 78%; /* #b8dbd9 */
+    --accent-foreground: 200 28% 25%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 240 20% 98%;
+
+    --success: 152 69% 31%;
+    --success-foreground: 240 20% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --border: 200 16% 85%;
+    --input: 200 16% 85%;
+    --ring: 200 28% 25%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --sky-dark: 200 28% 25%;
+    --sky-mid: 200 16% 42%;
+    --sky-light: 180 18% 78%;
+    --sky-pale: 240 20% 98%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 200 28% 25%;
+    --sidebar-primary-foreground: 240 20% 98%;
+    --sidebar-accent: 180 18% 78%;
+    --sidebar-accent-foreground: 200 28% 25%;
+    --sidebar-border: 200 16% 85%;
+    --sidebar-ring: 200 28% 25%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 240 20% 98%;
+
+    --card: 200 28% 10%;
+    --card-foreground: 240 20% 98%;
+
+    --popover: 200 28% 10%;
+    --popover-foreground: 240 20% 98%;
+
+    --primary: 180 18% 78%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 200 16% 42%;
+    --secondary-foreground: 240 20% 98%;
+
+    --muted: 200 28% 20%;
+    --muted-foreground: 200 16% 65%;
+
+    --accent: 200 28% 20%;
+    --accent-foreground: 180 18% 78%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 240 20% 98%;
+
+    --border: 200 28% 20%;
+    --input: 200 28% 20%;
+    --ring: 180 18% 78%;
+
+    --sidebar-background: 200 28% 10%;
+    --sidebar-foreground: 240 20% 98%;
+    --sidebar-primary: 180 18% 78%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 200 28% 20%;
+    --sidebar-accent-foreground: 180 18% 78%;
+    --sidebar-border: 200 28% 20%;
+    --sidebar-ring: 180 18% 78%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+  }
+
+  .gradient-sky {
+    background: linear-gradient(135deg, hsl(var(--sky-dark)) 0%, hsl(var(--sky-mid)) 50%, hsl(var(--sky-light)) 100%);
+  }
+
+  .gradient-subtle {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.3) 100%);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.4s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  @keyframes slideInLeft {
+    from { 
+      opacity: 0; 
+      transform: translateX(-20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
+  }
+}
