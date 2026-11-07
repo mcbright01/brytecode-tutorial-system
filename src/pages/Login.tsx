@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { getAuthErrorMessage, signInUser } from "@/services/auth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,18 +40,22 @@ const Login = () => {
     }
 
     setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      // TODO: Replace with actual API call
+    try {
+      const { profile } = await signInUser(formData.email, formData.password);
       toast({
         title: "Success",
         description: "Login successful!",
       });
-      // Redirect based on user role
-      navigate("/student");
-    }, 1500);
+      navigate(profile.role === "tutor" ? "/tutor" : "/student");
+    } catch (error) {
+      toast({
+        title: "Sign in failed",
+        description: getAuthErrorMessage(error),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

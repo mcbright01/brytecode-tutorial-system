@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { getAuthErrorMessage, registerStudent } from "@/services/auth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -116,18 +117,26 @@ const Signup = () => {
     if (!validateForm()) return;
 
     setIsLoading(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      // TODO: Replace with actual API call
+    try {
+      await registerStudent({
+        name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+        email: formData.email,
+        password: formData.password,
+      });
       toast({
         title: "Success",
         description: "Account created successfully! Redirecting...",
       });
-      // Redirect to student dashboard
       navigate("/student");
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Sign up failed",
+        description: getAuthErrorMessage(error),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const strengthColors: Record<string, string> = {
